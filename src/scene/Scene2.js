@@ -48,8 +48,6 @@ export default class Scene2 extends Phaser.Scene {
     this.enemies.add(this.ship2)
     this.enemies.add(this.ship3)
 
-    this.input.on('gameobjectdown', this.destroyShip, this)
-
     // 強化
     this.powerUps = this.physics.add.group()
     for (let i = 0; i < gameSettings.maxPowerUp; i++) {
@@ -101,6 +99,18 @@ export default class Scene2 extends Phaser.Scene {
     this.score = 0
     const scoreFormated = this.zeroPad(this.score, 6)
     this.scoreLabel.text = 'SCORE' + scoreFormated
+
+    // life
+    this.life = 3
+    this.lifes = this.add.group()
+    for (let i = 0; i < this.life; i++) {
+      const life = this.add.sprite(config.scale.width - (i * 10) - 10, 10, 'player').setScale(0.5)
+      this.lifes.add(life)
+    }
+  }
+
+  controlLife (life) {
+    this.lifes.getChildren()[life].destroy()
   }
 
   zeroPad (number, size) {
@@ -127,14 +137,24 @@ export default class Scene2 extends Phaser.Scene {
       return
     }
     const explosion = new Explosion(this, player.x, player.y)
-    
     player.disableBody(true, true)
-    this.time.addEvent({
-      delay: 1000,
-      callback: this.resetPlayer,
-      callbackScope: this,
-      loop: false
-    })
+    this.life -= 1
+    if (this.life < 0) {
+      this.add.text( config.scale.width / 2, config.scale.height / 2, 'GAME OVER', {
+        font: '25px Arial',
+        fill: 'yellow'
+      }).setOrigin(0.5, 0.5)
+      return
+    } else {
+      this.controlLife(this.life)
+      this.time.addEvent({
+        delay: 1000,
+        callback: this.resetPlayer,
+        callbackScope: this,
+        loop: false
+      })
+    }
+    
   }
 
   hitEnemy (projectile, enemy) {
@@ -165,7 +185,6 @@ export default class Scene2 extends Phaser.Scene {
       const beam = this.projectiles.getChildren()[i];
       beam.update()
     }
-
   }
 
   moveShip (ship, speed) {
