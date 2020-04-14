@@ -32,7 +32,7 @@ export default class Scene2 extends Phaser.Scene {
 
     // 敵人
     this.ship1 = this.physics.add.sprite(config.scale.width / 2 - 50, config.scale.height / 2, 'ship')
-    this.ship2 = this.physics.add.sprite(config.scale.width / 2 , config.scale.height / 2, 'ship2')
+    this.ship2 = this.physics.add.sprite(config.scale.width / 2, config.scale.height / 2, 'ship2')
     this.ship3 = this.physics.add.sprite(config.scale.width / 2 + 50, config.scale.height / 2, 'ship3')
 
     this.ship1.play('ship1_anims')
@@ -55,7 +55,7 @@ export default class Scene2 extends Phaser.Scene {
       this.powerUps.add(powerUp)
       powerUp.setRandomPosition(0, 0, config.scale.width, config.scale.height)
 
-      if ( Math.random() > 0.5 ) {
+      if (Math.random() > 0.5) {
         powerUp.play('red')
       } else {
         powerUp.play('gray')
@@ -65,7 +65,6 @@ export default class Scene2 extends Phaser.Scene {
       powerUp.setCollideWorldBounds(true)
       powerUp.setBounce(1)
     }
-    
     // player
     this.player = this.physics.add.sprite(config.scale.width / 2 - 8, config.scale.height - 64, 'player')
     this.player.play('thrust')
@@ -115,7 +114,7 @@ export default class Scene2 extends Phaser.Scene {
 
   zeroPad (number, size) {
     let stringNumber = String(number)
-    while (stringNumber.length < ( size || 2)) {
+    while (stringNumber.length < (size || 2)) {
       stringNumber = '0' + stringNumber
     }
     return stringNumber
@@ -137,14 +136,15 @@ export default class Scene2 extends Phaser.Scene {
       return
     }
     const explosion = new Explosion(this, player.x, player.y)
+    console.log(explosion)
+
     player.disableBody(true, true)
     this.life -= 1
     if (this.life < 0) {
-      this.add.text( config.scale.width / 2, config.scale.height / 2, 'GAME OVER', {
+      this.add.text(config.scale.width / 2, config.scale.height / 2, 'GAME OVER', {
         font: '25px Arial',
         fill: 'yellow'
       }).setOrigin(0.5, 0.5)
-      return
     } else {
       this.controlLife(this.life)
       this.time.addEvent({
@@ -154,11 +154,12 @@ export default class Scene2 extends Phaser.Scene {
         loop: false
       })
     }
-    
   }
 
   hitEnemy (projectile, enemy) {
     const explosion = new Explosion(this, enemy.x, enemy.y)
+    console.log(explosion)
+
     projectile.destroy()
     this.resetShipPos(enemy)
 
@@ -182,7 +183,7 @@ export default class Scene2 extends Phaser.Scene {
       }
     }
     for (let i = 0; i < this.projectiles.getChildren().length; i++) {
-      const beam = this.projectiles.getChildren()[i];
+      const beam = this.projectiles.getChildren()[i]
       beam.update()
     }
   }
@@ -224,6 +225,7 @@ export default class Scene2 extends Phaser.Scene {
 
   shootBeam () {
     const beam = new Beam(this)
+    console.log(beam)
   }
 
   resetPlayer () {
@@ -242,5 +244,6 @@ export default class Scene2 extends Phaser.Scene {
       },
       callbackScope: this
     })
+    console.log(tween)
   }
 }

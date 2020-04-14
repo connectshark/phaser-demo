@@ -15,7 +15,7 @@ export default {
     default: 'arcade',
     arcade: {
       debug: false
-    },
+    }
   },
   pixelArt: true,
   gameTitle: 'sedie',
