@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+
 export default class Scene1 extends Phaser.Scene {
   constructor () {
     super('bootGame')
@@ -162,5 +163,6 @@ export default class Scene1 extends Phaser.Scene {
     })
     // loading end
     this.scene.start('playGame')
+    // this.scene.start('endGame')
   }
 }

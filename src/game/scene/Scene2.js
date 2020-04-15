@@ -15,7 +15,6 @@ export default class Scene2 extends Phaser.Scene {
   create () {
     // 背景
     this.background = this.add.tileSprite(0, 0, config.scale.width, config.scale.height, 'background').setOrigin(0, 0)
-
     // 文字
     this.text1 = this.add.text(20, 20, 'Playing game', {
       font: '25px Arial',
@@ -141,10 +140,7 @@ export default class Scene2 extends Phaser.Scene {
     player.disableBody(true, true)
     this.life -= 1
     if (this.life < 0) {
-      this.add.text(config.scale.width / 2, config.scale.height / 2, 'GAME OVER', {
-        font: '25px Arial',
-        fill: 'yellow'
-      }).setOrigin(0.5, 0.5)
+      this.scene.start('endGame')
     } else {
       this.controlLife(this.life)
       this.time.addEvent({

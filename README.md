@@ -1,4 +1,4 @@
-# sedie-web
+# phaser-demo
 
 ## Project setup
 ```
