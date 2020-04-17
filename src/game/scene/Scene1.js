@@ -1,45 +1,45 @@
 import Phaser from 'phaser'
-
+import requireFile from '../../lib/requireFile'
 export default class Scene1 extends Phaser.Scene {
   constructor () {
     super('bootGame')
   }
 
   preload () {
-    this.load.image('background', 'assets/images/background.png')
+    this.load.image('background', requireFile('images/background.png'))
 
-    this.load.spritesheet('ship', 'assets/spritesheets/ship.png', {
+    this.load.spritesheet('ship', requireFile('spritesheets/ship.png'), {
       frameWidth: 16,
       frameHeight: 16
     })
-    this.load.spritesheet('ship2', 'assets/spritesheets/ship2.png', {
+    this.load.spritesheet('ship2', requireFile('spritesheets/ship2.png'), {
       frameWidth: 32,
       frameHeight: 16
     })
-    this.load.spritesheet('ship3', 'assets/spritesheets/ship3.png', {
+    this.load.spritesheet('ship3', requireFile('spritesheets/ship3.png'), {
       frameWidth: 32,
       frameHeight: 32
     })
-    this.load.spritesheet('explosion', 'assets/spritesheets/explosion.png', {
+    this.load.spritesheet('explosion', requireFile('spritesheets/explosion.png'), {
       frameWidth: 16,
       frameHeight: 16
     })
-    this.load.spritesheet('power-up', 'assets/spritesheets/power-up.png', {
+    this.load.spritesheet('power-up', requireFile('spritesheets/power-up.png'), {
       frameWidth: 16,
       frameHeight: 16
     })
 
-    this.load.spritesheet('player', 'assets/spritesheets/player.png', {
+    this.load.spritesheet('player', requireFile('spritesheets/player.png'), {
       frameWidth: 16,
       frameHeight: 24
     })
 
-    this.load.spritesheet('beam', 'assets/spritesheets/beam.png', {
+    this.load.spritesheet('beam', requireFile('spritesheets/beam.png'), {
       frameWidth: 16,
       frameHeight: 16
     })
 
-    this.load.bitmapFont('pixelFont', 'assets/font/font.png', 'assets/font/font.xml')
+    this.load.bitmapFont('pixelFont', requireFile('font/font.png'), requireFile('font/font.xml'))
 
     // progress bar
     const progressBar = this.add.graphics()
