@@ -1,47 +1,45 @@
 import Phaser from 'phaser'
-import requireFile from '../../lib/requireFile'
 export default class Scene1 extends Phaser.Scene {
   constructor () {
     super('bootGame')
   }
 
   preload () {
-    this.load.image('background', requireFile('images/background.png'))
+    this.load.image('background', 'images/background.png')
 
-    this.load.spritesheet('ship', requireFile('spritesheets/ship.png'), {
+    this.load.spritesheet('ship', 'spritesheets/ship.png', {
       frameWidth: 16,
       frameHeight: 16
     })
-    this.load.spritesheet('ship2', requireFile('spritesheets/ship2.png'), {
+    this.load.spritesheet('ship2', 'spritesheets/ship2.png', {
       frameWidth: 32,
       frameHeight: 16
     })
-    this.load.spritesheet('ship3', requireFile('spritesheets/ship3.png'), {
+    this.load.spritesheet('ship3', 'spritesheets/ship3.png', {
       frameWidth: 32,
       frameHeight: 32
     })
-    this.load.spritesheet('explosion', requireFile('spritesheets/explosion.png'), {
+    this.load.spritesheet('explosion', 'spritesheets/explosion.png', {
       frameWidth: 16,
       frameHeight: 16
     })
-    this.load.spritesheet('power-up', requireFile('spritesheets/power-up.png'), {
+    this.load.spritesheet('power-up', 'spritesheets/power-up.png', {
       frameWidth: 16,
       frameHeight: 16
     })
 
-    this.load.spritesheet('player', requireFile('spritesheets/player.png'), {
+    this.load.spritesheet('player', 'spritesheets/player.png', {
       frameWidth: 16,
       frameHeight: 24
     })
 
-    this.load.spritesheet('beam', requireFile('spritesheets/beam.png'), {
+    this.load.spritesheet('beam', 'spritesheets/beam.png', {
       frameWidth: 16,
       frameHeight: 16
     })
 
-    this.load.bitmapFont('pixelFont', requireFile('font/font.png'), requireFile('font/font.xml'))
+    this.load.bitmapFont('pixelFont', 'font/font.png', 'font/font.xml')
 
-    // progress bar
     const progressBar = this.add.graphics()
     const progressBox = this.add.graphics()
     progressBox.fillStyle(0x222222, 0.8)
@@ -103,7 +101,6 @@ export default class Scene1 extends Phaser.Scene {
 
   create () {
     this.add.text(20, 20, 'Loading game...')
-    // loading start
     this.anims.create({
       key: 'ship1_anims',
       frames: this.anims.generateFrameNumbers('ship'),
@@ -161,8 +158,6 @@ export default class Scene1 extends Phaser.Scene {
       frameRate: 20,
       repeat: -1
     })
-    // loading end
     this.scene.start('playGame')
-    // this.scene.start('endGame')
   }
 }
